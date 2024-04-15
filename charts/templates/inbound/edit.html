@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}修改入库单{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-inorder' action="{% url 'inbound:update' inbound_id %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">修改入库单</h2>
+                <div class="form-group">
+                    {{ inbound_form.clothes.label_tag }}
+                    {{ inbound_form.clothes }}
+                    {{ inbound_form.clothes.errors }}
+                </div>
+                <div class="form-group">
+                    {{ inbound_form.price.label_tag }}
+                    {{ inbound_form.price }}
+                    {{ inbound_form.price.errors }}
+                </div>
+                <div class="form-group">
+                    {{ inbound_form.amount.label_tag }}
+                    {{ inbound_form.amount }}
+                    {{ inbound_form.amount.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ inbound_form.create_time.label_tag }}
+                    {{ inbound_form.create_time }}
+                    {{ inbound_form.create_time.errors }}
+                </div>
+                <p id="checkPrice"></p>
+                <p id="xianshiid"></p>
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">保存</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

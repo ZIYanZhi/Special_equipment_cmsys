@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}出库管理{% endblock %}
+{% block content %}
+    {% load static %}
+    <head>
+    <title>Line Chart</title>
+    </head>
+<body>
+    <div id="line-chart" style="width: 600px; height: 400px;">111</div>
+
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script type="text/javascript">
+        // 使用 Echarts 绘制折线图
+        var monthly_totals = {{ monthly_totals|safe }};
+        var chart = echarts.init(document.getElementById('line-chart'));
+        var option = {
+            xAxis: {
+                type: 'category',
+                data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                type: 'line',
+                data: monthly_totals
+            }]
+        };
+        chart.setOption(option);
+    </script>
+</body>
+{% endblock %}

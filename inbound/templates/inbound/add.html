@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}添加入库单{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-inorder' action="{% url 'inbound:add' %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">添加入库单</h2>
+
+                <div class="form-group">
+                    {{ inorder_form.clothes.label_tag }}
+                    {{ inorder_form.clothes }}
+                    {{ inorder_form.clothes.errors }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.price.label_tag }}
+                    {{ inorder_form.price }}
+                    {{ inorder_form.price.errors }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.amount.label_tag }}
+                    {{ inorder_form.amount }}
+                    {{ inorder_form.amount.errors }}
+                </div>
+
+                <p id="checkPrice"></p>
+                <p id="xianshiid"></p>
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">添加</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

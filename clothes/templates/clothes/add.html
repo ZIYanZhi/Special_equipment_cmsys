@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}添加机件{% endblock %}
+{% block content %}
+    <div class="container" style="height: auto">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-clothes' action="{% url 'clothes:add' %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">添加器材</h2>
+                <div class="form-group">
+                    {{ clothes_form.lei.label_tag }}
+                    {{ clothes_form.lei }}
+                    {{ clothes_form.lei.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.name.label_tag }}
+                    {{ clothes_form.name }}
+                    {{ clothes_form.name.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.sn.label_tag }}
+                    {{ clothes_form.sn }}
+                    {{ clothes_form.sn.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.price.label_tag }}
+                    {{ clothes_form.price }}
+                    {{ clothes_form.price.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.danwei.label_tag }}
+                    {{ clothes_form.danwei }}
+                    {{ clothes_form.danwei.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.changjia.label_tag }}
+                    {{ clothes_form.changjia }}
+                    {{ clothes_form.changjia.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ clothes_form.stock.label_tag }}
+                    {{ clothes_form.stock }}
+                    {{ clothes_form.stock.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.stock_down.label_tag }}
+                    {{ clothes_form.stock_down }}
+                    {{ clothes_form.stock_down.errors }}
+                </div>
+                <div class="form-group">
+                    {{ clothes_form.desc.label_tag }}
+                    {{ clothes_form.desc }}
+                    {{ clothes_form.desc.errors }}
+                </div>
+
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">添加</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

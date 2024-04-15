@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}出库管理{% endblock %}
+{% block content %}
+    <div id="content" style="height: 600px">
+
+            <div id="table" align="center">
+
+            <a href="{% url 'outbound:biao' %}?quarter=1" class="btn btn-primary">一季度</a>
+            <a href="{% url 'outbound:biao' %}?quarter=2" class="btn btn-primary">二季度</a>
+            <a href="{% url 'outbound:biao' %}?quarter=3" class="btn btn-primary">三季度</a>
+            <a href="{% url 'outbound:biao' %}?quarter=4" class="btn btn-primary">四季度</a>
+            {% if result %}
+                <table class="table table-striped table-bordered table-hover  table-condensed" style="width: 1100px">
+
+                 <tr>
+                    <td colspan="3">
+                        <div class="d-flex justify-content-end">
+                            <a href="{% url 'outbound:download' %}" class="btn btn-primary">导出</a>
+                        </div>
+                    </td>
+                 </tr>
+
+                <tr class="success">
+        <td class="text-center">车号</td>
+        <td class="text-center">季度</td>
+        <td class="text-center">费用（元）</td>
+    </tr>
+    {% for foo in result %}
+        <tr>
+            <td class="text-center">{{ foo.customer__address }}</td>
+            <td class="text-center">{{ foo.quarter }}</td>
+            <td class="text-center">{{ foo.total_amount }}</td>
+        </tr>
+    {% endfor %}
+
+            {% endif %}
+            </table>
+        </div>
+        <!-- 分页开始 -->
+        <div class="text-center">
+
+            <ul class="pagination">
+                <li><a href="/outbound/?page=1" rel="external nofollow">首页</a></li>
+                {% if result.has_previous %}
+                    <li><a href="/outbound/?page={{ result.previous_page_number }}" rel="external nofollow">上一页</a></li>
+                {% endif %}
+                {% for num in result.paginator.page_range %}
+                    <li><a href="/outbound/?page={{ num }}" rel="external nofollow">{{ num }}</a></li>
+                {% endfor %}
+                {% if result.has_next %}
+                    <li><a href="/outbound/?page={{ result.next_page_number }}" rel="external nofollow">下一页</a></li>
+                {% endif %}
+                <li><a href="/outbound/?page={{ result.paginator.num_pages }}" rel="external nofollow">尾页</a></li>
+            </ul>
+        </div>
+        <!-- 分页结束 -->
+    </div>
+{% endblock %}

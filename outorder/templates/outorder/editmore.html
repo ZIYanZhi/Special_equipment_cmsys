@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}修改数量{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-outorder' action="{% url 'outorder:editmore' outorder_id=outorder_id outorderclothes_id=outorderclothes_id %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">修改数量</h2>
+                <div class="form-group">
+                    {{ editmore_form.clothes.label_tag }}
+                    {{ editmore_form.clothes }}
+                    {{ editmore_form.clothes.errors }}
+
+                </div>
+                <div class="form-group">
+                    {{ editmore_form.amount.label_tag }}
+                    {{ editmore_form.amount }}
+                    {{ editmore_form.amount.errors }}
+                </div>
+                <div class="form-group">
+                    {{ editmore_form.name.label_tag }}
+                    {{ editmore_form.name }}
+                    {{ editmore_form.name.errors }}
+                </div>
+                <div class="form-group">
+                    {{ editmore_form.create_time.label_tag }}
+                    {{ editmore_form.create_time }}
+                    {{ editmore_form.create_time.errors }}
+                </div>
+                <p id="checkResult"></p>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">保存</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

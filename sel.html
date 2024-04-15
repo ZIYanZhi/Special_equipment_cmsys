@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <select class="selectpicker show-tick form-control" data-live-search="true">
+
+                    <option>111</option>
+                    <option>wang</option>
+
+                </select>
+</body>
+</html>
+
+
+
+<div class="text-center">
+        <ul class="pagination">
+        <li><a href="/customer/?page=1" rel="external nofollow">首页</a></li>
+        {% if result.has_previous %}
+            <li><a href="/customer/?page={{ result.previous_page_number }}" rel="external nofollow">上一页</a></li>
+        {% endif %}
+        {% for num in result.paginator.page_range %}
+            {% ifequal num result.number %}
+                <li class="active"><span>{{ num }}</span></li>
+            {% else %}
+                <li><a href="/customer/?page={{ num }}{{ next_page_url }}" rel="external nofollow">{{ num }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+        {% if result.has_next %}
+            <li><a href="/customer/?page={{ result.next_page_number }}{{ next_page_url }}" rel="external nofollow">下一页</a></li>
+        {% endif %}
+        <li><a href="/customer/?page={{ result.paginator.num_pages }}{{ next_page_url }}" rel="external nofollow">尾页</a></li>
+    </ul>
+</div>
+
+    <nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li {% if not u.has_previous %}class="disabled"{% endif %}>
+      <a {% if u.has_previous %}href="{% url 'App:data' %}?page={{ u.previous_page_number }}"{% endif %} aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    {% for index in u.paginator.page_range %}
+        <li {% if index == u.number %}class="active"{% endif %}><a href="{% url 'App:data' %}?page={{ index }}">{{ index }}</a></li>
+    {% endfor %}
+
+    <li {% if not u.has_next %}class="disabled"{% endif %}>
+      <a {% if u.has_next %}href="{% url 'App:data' %}?page={{ u.next_page_number }}"{% endif %} aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
